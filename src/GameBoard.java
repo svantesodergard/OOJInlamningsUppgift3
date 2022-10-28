@@ -38,4 +38,25 @@ public class GameBoard {
         Collections.shuffle(numbers);
         return numbers;
     }
+    public int findSquare(String siffra) {
+        int index = -1;
+        for(int i = 0; i < squareCount; i++){
+            if (squares.get(i).getButton().getText().equals(siffra)){
+                index = i;
+            }
+        }
+        return index;
+    }
+
+    public void moveSquare(int index) {
+        int x = squares.get(index).getX();
+        int y = squares.get(index).getY();
+        int emptySquareIndex = findSquare("0");
+        if (squares.get(emptySquareIndex).getX()==x && Math.abs(squares.get(emptySquareIndex).getY()-y)==1) {
+            squares.get(emptySquareIndex).getButton().setVisible(true);
+        }
+        if (squares.get(emptySquareIndex).getY()==y && Math.abs(squares.get(emptySquareIndex).getX()-x)==1) {
+            squares.get(emptySquareIndex).getButton().setVisible(true);
+        }
+    }
 }
