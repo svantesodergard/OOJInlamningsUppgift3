@@ -36,7 +36,5 @@ public class GuiHandler extends JFrame implements ActionListener {
        JButton button = (JButton) e.getSource();
        int squareIndex = gameBoard.findSquare(button.getText());
        gameBoard.moveSquare(squareIndex);
-
-
     }
 }
