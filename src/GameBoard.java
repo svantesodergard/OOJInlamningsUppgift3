@@ -20,7 +20,7 @@ public class GameBoard {
                buttons[i].setVisible(false);
            }
            buttons[i].setText(numbers.get(i));
-        }
+        }//test
     }
 
     public List<String> createShuffledList() {
