@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class GuiHandler extends JFrame implements ActionListener {
-    GameBoard gameBoard = new GameBoard();
+    GameBoard gameBoard = new GameBoard(4, 4);
     GuiHandler() {
         JPanel game = new JPanel();
         gameBoard.createSquares();
