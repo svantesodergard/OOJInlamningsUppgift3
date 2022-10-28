@@ -1,14 +1,17 @@
 import javax.swing.*;
 
 public class BoardSquare {
-    JButton button;
+    JButton button = new JButton();
     int x;
     int y;
 
-    public BoardSquare(JButton button, int x, int y) {
-        this.button = button;
+    public BoardSquare(int x, int y) {
         this.x = x;
         this.y = y;
+    }
+
+    public void setButton(JButton button) {
+        this.button = button;
     }
 
     public JButton getButton() {
