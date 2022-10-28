@@ -4,17 +4,22 @@ import java.util.Collections;
 import java.util.List;
 
 public class GameBoard {
-    int squareCount = 16;
+    int width, height;
+    int squareCount;
     List <BoardSquare> squares = new ArrayList<>();
-
+    public GameBoard(int width, int height) {
+        this.width = width;
+        this.height = height;
+        this.squareCount = width*height;
+    }
     public List<BoardSquare> getSquares() {
         return squares;
     }
 
     public void createSquares() {
 
-        for (int y = 0; y < 4; y++) {
-            for(int x = 0; x < 4; x++){
+        for (int y = 0; y < height; y++) {
+            for(int x = 0; x < width; x++){
                 BoardSquare square = new BoardSquare(x,y);
                 squares.add(square);
             }
