@@ -54,9 +54,15 @@ public class GameBoard {
         int emptySquareIndex = findSquare("0");
         if (squares.get(emptySquareIndex).getX()==x && Math.abs(squares.get(emptySquareIndex).getY()-y)==1) {
             squares.get(emptySquareIndex).getButton().setVisible(true);
+            squares.get(emptySquareIndex).getButton().setText(squares.get(index).button.getText());
+            squares.get(index).getButton().setText("0");
+            squares.get(index).getButton().setVisible(false);
         }
         if (squares.get(emptySquareIndex).getY()==y && Math.abs(squares.get(emptySquareIndex).getX()-x)==1) {
             squares.get(emptySquareIndex).getButton().setVisible(true);
+            squares.get(emptySquareIndex).getButton().setText(squares.get(index).button.getText());
+            squares.get(index).getButton().setText("0");
+            squares.get(index).getButton().setVisible(false);
         }
     }
 }
