@@ -5,10 +5,11 @@ public class GuiHandler extends JFrame {
    GuiHandler() {
        JPanel game = new JPanel();
        GameBoard gameBoard = new GameBoard();
-       gameBoard.createButtons();
+       gameBoard.createSquares();
+       gameBoard.setNumbersOnSquares();
 
-       for (JButton button : gameBoard.getButtons()) {
-           game.add(button);
+       for (BoardSquare square : gameBoard.getSquares()) {
+           game.add(square.getButton());
        }
 
        game.setLayout(new GridLayout(4, 4));
