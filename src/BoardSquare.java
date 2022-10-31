@@ -25,4 +25,7 @@ public class BoardSquare {
     public int getY() {
         return y;
     }
+    public int getNumberOfButton(){
+        return Integer.parseInt(button.getText());
+    }
 }

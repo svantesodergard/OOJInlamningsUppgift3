@@ -31,6 +31,9 @@ public class GuiHandler extends JFrame implements ActionListener {
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
+    public void gameIsFinished(){
+        JOptionPane.showMessageDialog(null,"Grattis, du vann!");
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -41,6 +44,9 @@ public class GuiHandler extends JFrame implements ActionListener {
             JButton button = (JButton) e.getSource();
             int squareIndex = gameBoard.findSquare(button.getText());
             gameBoard.moveSquare(squareIndex);
+            if (gameBoard.isGameFinished()){
+                gameIsFinished();
+            }
         }
     }
 }

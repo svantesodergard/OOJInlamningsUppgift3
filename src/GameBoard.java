@@ -83,4 +83,15 @@ public class GameBoard {
         }
         return Math.abs(emptySquare.getY() - squareToMove.getY()) == 1;
     }
+
+    public boolean isGameFinished(){
+        for (int i=0; i<squareCount-2 ; i++){
+            if (squares.get(i).getNumberOfButton()>squares.get(i+1).getNumberOfButton()){
+                return false;
+            }
+        }
+        return true;
+
+    }
+
 }
