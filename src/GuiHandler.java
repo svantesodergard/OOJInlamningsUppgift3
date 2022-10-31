@@ -28,10 +28,14 @@ public class GuiHandler extends JFrame implements ActionListener {
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
+    //Ruta kommer upp om spelaren klarar spelet.
     public void gameIsFinished(){
         JOptionPane.showMessageDialog(null,"Grattis, du vann!");
     }
 
+    /*Spelaren skriver in hur stor spelplan hen önskar spela på. Felmeddelande om mindre än 0. 
+    Kastar ett fel om användaren matar in andra tecken än siffror.
+    Skapar en ny spelplan utifrån spelarens angivna storlek.  */
     public void newGame() throws NumberFormatException {
         int size = Integer.parseInt(gameSize.getText());
         if (size <= 0) {
@@ -53,13 +57,16 @@ public class GuiHandler extends JFrame implements ActionListener {
         this.repaint();
     }
 
+    /*
+    Metoden hanterar olika knapptryckningar, beroende på om spelaren trycker på "Nytt spel", 
+    knapp med siffror eller "Lös snabbt".  */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == newGame) {
             this.remove(game);
             try {
                 newGame();
-            } catch (NumberFormatException exception) {
+            } catch (NumberFormatException exception) { //Fångar upp fel som kastas av metoden newGame.
                 JOptionPane.showMessageDialog(null, "Skriv in nummer!");
             }
         } else if (e.getSource() == fastSolve) {
