@@ -4,27 +4,32 @@ import java.util.Collections;
 import java.util.List;
 
 public class GameBoard {
-    int squareCount = 16;
-    List<BoardSquare> squares = new ArrayList<>();
-
+    int width, height;
+    int squareCount;
+    List <BoardSquare> squares = new ArrayList<>();
+    public GameBoard(int width, int height) {
+        this.width = width;
+        this.height = height;
+        this.squareCount = width*height;
+    }
     public List<BoardSquare> getSquares() {
         return squares;
     }
 
     public void createSquares() {
 
-        for (int y = 0; y < 4; y++) {
-            for (int x = 0; x < 4; x++) {
-                BoardSquare square = new BoardSquare(x, y);
+        for (int y = 0; y < height; y++) {
+            for(int x = 0; x < width; x++){
+                BoardSquare square = new BoardSquare(x,y);
                 squares.add(square);
             }
         }
     }
 
-    public void setNumbersOnSquares() {
+    public void setNumbersOnSquares(){
         List<String> numbers = createShuffledList();
 
-        for (int i = 0; i < squareCount; i++) {
+        for(int i = 0; i < squareCount; i++){
             if (numbers.get(i).equals("0")) {
                 squares.get(i).getButton().setVisible(false);
             }
@@ -41,10 +46,10 @@ public class GameBoard {
         return numbers;
     }
 
-    public int findSquare(String siffra) {
+    public int findSquare(String faceValue) {
         int index = -1;
-        for (int i = 0; i < squareCount; i++) {
-            if (squares.get(i).getButton().getText().equals(siffra)) {
+        for(int i = 0; i < squareCount; i++){
+            if (squares.get(i).getButton().getText().equals(faceValue)){
                 index = i;
             }
         }
@@ -52,20 +57,28 @@ public class GameBoard {
     }
 
     public void moveSquare(int index) {
-        int x = squares.get(index).getX();
-        int y = squares.get(index).getY();
         int emptySquareIndex = findSquare("0");
-        if (squares.get(emptySquareIndex).getX() == x && Math.abs(squares.get(emptySquareIndex).getY() - y) == 1) {
-            squares.get(emptySquareIndex).getButton().setVisible(true);
-            squares.get(emptySquareIndex).getButton().setText(squares.get(index).button.getText());
-            squares.get(index).getButton().setText("0");
-            squares.get(index).getButton().setVisible(false);
+        JButton buttonToMove = squares.get(index).getButton();
+        JButton emptyButton = squares.get(emptySquareIndex).getButton();
+        if (isSquareMovable(index)) {
+            emptyButton.setVisible(true);
+            emptyButton.setText(buttonToMove.getText());
+            buttonToMove.setText("0");
+            buttonToMove.setVisible(false);
         }
-        if (squares.get(emptySquareIndex).getY() == y && Math.abs(squares.get(emptySquareIndex).getX() - x) == 1) {
-            squares.get(emptySquareIndex).getButton().setVisible(true);
-            squares.get(emptySquareIndex).getButton().setText(squares.get(index).button.getText());
-            squares.get(index).getButton().setText("0");
-            squares.get(index).getButton().setVisible(false);
+    }
+
+    public boolean isSquareMovable(int index) {
+        int emptySquareIndex = findSquare("0");
+        BoardSquare squareToMove = squares.get(index);
+        BoardSquare emptySquare = squares.get(emptySquareIndex);
+
+        if (emptySquare.getX() != squareToMove.getX() && emptySquare.getY() != squareToMove.getY()) {
+            return false;
         }
+        if (Math.abs(emptySquare.getX() - squareToMove.getX()) == 1) {
+            return true;
+        }
+        return Math.abs(emptySquare.getY() - squareToMove.getY()) == 1;
     }
 }
