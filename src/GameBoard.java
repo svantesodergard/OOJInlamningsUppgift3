@@ -32,6 +32,8 @@ public class GameBoard {
         for(int i = 0; i < squareCount; i++){
             if (numbers.get(i).equals("0")) {
                 squares.get(i).getButton().setVisible(false);
+            } else {
+                squares.get(i).getButton().setVisible(true);
             }
             squares.get(i).getButton().setText(numbers.get(i));
         }

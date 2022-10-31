@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 public class GuiHandler extends JFrame implements ActionListener {
     GameBoard gameBoard = new GameBoard(4, 4);
+    JButton newGame = new JButton("Nytt Spel");
     GuiHandler() {
         JPanel game = new JPanel();
         gameBoard.createSquares();
@@ -18,7 +19,7 @@ public class GuiHandler extends JFrame implements ActionListener {
         game.setLayout(new GridLayout(4, 4));
 
         JPanel controls = new JPanel();
-        JButton newGame = new JButton("Nytt Spel");
+        newGame.addActionListener(this);
         controls.add(newGame);
 
         this.setLayout(new BorderLayout());
@@ -33,8 +34,13 @@ public class GuiHandler extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        JButton button = (JButton) e.getSource();
-        int squareIndex = gameBoard.findSquare(button.getText());
-        gameBoard.moveSquare(squareIndex);
+        if (e.getSource() == newGame) {
+            gameBoard.setNumbersOnSquares();
+            return;
+        } else {
+            JButton button = (JButton) e.getSource();
+            int squareIndex = gameBoard.findSquare(button.getText());
+            gameBoard.moveSquare(squareIndex);
+        }
     }
 }
