@@ -4,9 +4,9 @@ import java.util.Collections;
 import java.util.List;
 
 public class GameBoard {
-    int width, height;
-    int squareCount;
-    List <BoardSquare> squares = new ArrayList<>();
+    private int width, height;
+    private int squareCount;
+    private List <BoardSquare> squares = new ArrayList<>();
     public GameBoard(int width, int height) {
         this.width = width;
         this.height = height;
@@ -17,7 +17,6 @@ public class GameBoard {
     }
 
     public void createSquares() {
-
         for (int y = 0; y < height; y++) {
             for(int x = 0; x < width; x++){
                 BoardSquare square = new BoardSquare(x,y);
@@ -26,8 +25,8 @@ public class GameBoard {
         }
     }
 
-    public void setNumbersOnSquares(){
-        List<String> numbers = createShuffledList();
+    public void setNumbersOnSquares(boolean quickSolve){
+        List<String> numbers = createShuffledList(quickSolve);
 
         for(int i = 0; i < squareCount; i++){
             if (numbers.get(i).equals("0")) {
@@ -39,12 +38,15 @@ public class GameBoard {
         }
     }
 
-    public List<String> createShuffledList() {
+    public List<String> createShuffledList(boolean quickSolve) {
         List<String> numbers = new ArrayList<>();
-        for (int i = 0; i < squareCount; i++) {
+        for (int i = 1; i < squareCount; i++) {
             numbers.add(String.valueOf(i));
         }
-        Collections.shuffle(numbers);
+        numbers.add("0");
+        if (!quickSolve) {
+            Collections.shuffle(numbers);
+        }
         return numbers;
     }
 
@@ -81,12 +83,15 @@ public class GameBoard {
         if (Math.abs(emptySquare.getX() - squareToMove.getX()) == 1) {
             return true;
         }
-        return Math.abs(emptySquare.getY() - squareToMove.getY()) == 1;
+        if (Math.abs(emptySquare.getY() - squareToMove.getY()) == 1) {
+            return true;
+        }
+        return false;
     }
 
     public boolean isGameFinished(){
-        for (int i=0; i<squareCount-2 ; i++){
-            if (squares.get(i).getNumberOfButton()>squares.get(i+1).getNumberOfButton()){
+        for (int i=0; i<squareCount; i++){
+            if (squares.get(i).getNumberOfButton() != i+1 && squares.get(i).getNumberOfButton() != 0) {
                 return false;
             }
         }
