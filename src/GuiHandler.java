@@ -12,7 +12,7 @@ public class GuiHandler extends JFrame implements ActionListener {
     private JPanel game;
     JPanel controls = new JPanel();
     GuiHandler() {
-        newGame();
+
         newGame.addActionListener(this);
         fastSolve.addActionListener(this);
         controls.add(labelForGameSize);
@@ -22,6 +22,7 @@ public class GuiHandler extends JFrame implements ActionListener {
 
         this.setLayout(new BorderLayout());
         this.add(controls, BorderLayout.NORTH);
+        newGame();
 
         this.setVisible(true);
         this.setSize(400, 400);
