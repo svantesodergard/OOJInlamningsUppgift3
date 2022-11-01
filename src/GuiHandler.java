@@ -22,7 +22,12 @@ public class GuiHandler extends JFrame implements ActionListener {
 
         this.setLayout(new BorderLayout());
         this.add(controls, BorderLayout.NORTH);
-        newGame();
+        try {
+            newGame();
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Måste stå siffra i rutan");
+        }
+
 
         this.setVisible(true);
         this.setSize(400, 400);
